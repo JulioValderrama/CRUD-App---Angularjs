@@ -16,6 +16,7 @@
         </div>
         <%= query.id %>
         <!-- add user form -->
+        <!-- With that action we will send a POST REQUEST to that url. We have an API route.post("/api/users/:id", controller.update) that will access to that ID in the URL (that comes from the _show.ejs file) with the query.id (that comes from the response from the database) -->
         <form action= "/api/users/<%= query.id %>" method="POST" id="update_user">
             <div class="new_user">
                 <div class="form-group">
