@@ -1,17 +1,15 @@
 // To allow to start the server
 const express = require("express");
 const dotenv = require("dotenv"); // Allow you to separate your secrect from your source code
-const morgan = require("morgan");
+const morgan = require("morgan"); // It console.log() the type of Requests we get
 const bodyparser = require("body-parser");
 const path = require("path");
-
-
 const connectDB = require("./server/database/connection");
-
 const app = express();
-
-dotenv.config( {path: 'config.env'})
 const PORT = process.env.PORT || 8080
+
+// To let the dotenv Module the path where we have the .env file with all our Enviroment VIARABLES
+dotenv.config( {path: 'config.env'})
 
 // log requests
 app.use(morgan('tiny'));
@@ -19,10 +17,10 @@ app.use(morgan('tiny'));
 // mongodb connection
 connectDB();
 
-// parse request to body parser
+// We create a middleware to parse REQUEST to body parser
 app.use(bodyparser.urlencoded({ extended: true}))
 
-// set view engine
+// set EJS view engine 
 app.set("view engine", "ejs");
 
 // load assets

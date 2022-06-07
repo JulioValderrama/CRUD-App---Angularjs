@@ -72,6 +72,7 @@ exports.update = (req, res) => {
         .send({ message: "Data to update can not be empty!"});
     }
 
+    // We get this data when we click on the SAVE button on the update_user form with the method POST. The id was in URL from the edit button we click in _show.ejs
     const id = req.params.id;
 
     Userdb.findByIdAndUpdate(id, req.body)
@@ -81,15 +82,13 @@ exports.update = (req, res) => {
         }
         else {
             //res.send(data)
-            
-            console.log(`User ${req.body} UPDATED!!`)
+            console.log(`User ${req.body.name} UPDATED!!`)
             res.redirect("/");
         }
         })
         .catch(err => {
             res.status(500).send({ message : "Error Update user information"})
         })
-
 }
 
 // delete user with specified user id in the request
