@@ -1,3 +1,14 @@
+angular.module('myApp', [])
+
+angular.module("myApp")
+    .controller("homeController", ["$scope", function($scope) {
+
+        $scope.angu = "HOLA";
+
+    }])
+
+
+
 
 // To send a DELETE Request from the <a> delet ebottom in _show.ejs 
 
@@ -21,3 +32,4 @@ if (window.location.pathname == "/") {
 
     })
 }
+

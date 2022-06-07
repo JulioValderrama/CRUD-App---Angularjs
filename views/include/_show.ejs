@@ -1,6 +1,6 @@
 <!--Using ejs engine in rder to iterate through the list of Objects we've got from the database thanks to the HTTP GET request "/" when visiting the home page-->
 <% for(var i = 0; i < users.length; i++) { %>
-
+    
     <tr>
 
         <!--Data display with DATA from the database  -->
@@ -25,5 +25,6 @@
     </tr>
     <h3><%= users[i]._id%></h3>
     <h3><%= caca[i]._id%></h3> <!--USING res.locals from the Route "/" GET that the server SEND to the database -->
+    
 
 <% } %>
