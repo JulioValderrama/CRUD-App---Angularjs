@@ -8,50 +8,48 @@ angular.module("myApp")
         $resourceProvider.defaults.stripTrailingSlashes = false;
     }])
 
-    .controller("homeController", ["$scope", "$resource", function($scope, $resource) {
+    .controller("homeController", ["$scope", "$resource", "$http", function($scope, $resource, $http) {
 
         $scope.angularusers = window.angularusers;
         $scope.angularClick;
-        $scope.getCarResponse;
+        $scope.getUsers;
+        $scope.getUser;
 
-        $scope.getUser = function() {
+        $scope.clickGetUsers = function() {
 
-            var getUser = $resource("/api/users?id=:id", {
-                id: "@id"
-            }, {
-                "typeReq": {
-                    method: "get",
-                    isArray: false
-                }
-            })
-            .typeReq({
-                id: "62a0036616a073a00adb26e5"
-            })
-            .$promise
-            .then(function(result) {
-                if (result) {
-                    $scope.getCarSucceeded = true;
-                    $scope.getCarResponse = JSON.stringify(result, null, 3);
-                 } else {
-                    $scope.getCarFailed = true;
-                    $scope.getCarErrorMsg = "Error occurred.";                  
-                 }
-                }, function(error) {
-                 $scope.getCarFailed = true;
-                 $scope.getCarErrorMsg = "Error occurred.";
-            });
+            $http.get("http://localhost:5500/api/users")
+                .then(response => {
+                $scope.getUsers = response.data;
+                console.log("REQUEST SENT")
+                console.log(response.data)
+                })
+                .catch(response => {
+                $scope.content = "Something went WRONG!";
+                })
         }
+
+        $scope.clickGetUser = function(index) {
+
+            id = angularusers[index]._id;
+
+            $http.get(`http://localhost:5500/api/users?id=${id}`)
+                .then(response => {
+                    $scope.getUser = response.data;
+                    console.log("REQUEST SENT")
+                    console.log(response.data)
+                })
+                .catch(response => {
+                    $scope.content = "Something went WRONG!";
+                })
+        }
+
+        
 
         $scope.getDetails = (index) => {
             
             $scope.index = index + 1;
             $scope.angularClick = $scope.angularusers[index]
         }
-
-
-
-
-
 
     }])
 
@@ -80,3 +78,37 @@ if (window.location.pathname == "/") {
     })
 }
 
+
+
+
+
+// A DIFFERENT WAY OF SENDING REQUEST WITH $RESOURCE SERVICE
+
+
+// $scope.getUser = function() {
+
+//     var getUser = $resource("/api/users?id=:id", {
+//         id: "@id"
+//     }, {
+//         "typeReq": {
+//             method: "get",
+//             isArray: false
+//         }
+//     })
+//     .typeReq({
+//         id: "62a0036616a073a00adb26e5"
+//     })
+//     .$promise
+//     .then(function(result) {
+//         if (result) {
+//             $scope.getCarSucceeded = true;
+//             $scope.getCarResponse = JSON.stringify(result, null, 3);
+//          } else {
+//             $scope.getCarFailed = true;
+//             $scope.getCarErrorMsg = "Error occurred.";                  
+//          }
+//         }, function(error) {
+//          $scope.getCarFailed = true;
+//          $scope.getCarErrorMsg = "Error occurred.";
+//     });
+// }
