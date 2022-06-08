@@ -1,14 +1,17 @@
 <!--Using ejs engine in rder to iterate through the list of Objects we've got from the database thanks to the HTTP GET request "/" when visiting the home page-->
+<script> angularusers = [] </script>
+
 <% for(var i = 0; i < users.length; i++) { %>
-    
+
     <tr>
 
         <!--Data display with DATA from the database  -->
         <td><%= i + 1 %></td>
-        <td><%= users[i].name %></td>
-        <td><%= users[i].email %></td>
-        <td><%= users[i].gender %></td>
-        <td><%= users[i].status %></td>
+        <td><%= users[i].name %></td> <script> angularusers["<%= i  %>"] = {name: "<%= users[i].name %>"} </script>
+        <td><%= users[i].email %></td> <script> angularusers["<%= i  %>"].email = "<%= users[i].email %>" </script>
+        <td><%= users[i].gender %></td> <script> angularusers["<%= i  %>"].gender = "<%= users[i].gender %>"  </script>
+        <td><%= users[i].status %></td> <script> angularusers["<%= i  %>"].status = "<%= users[i].status %>"  </script>
+
 
         <!--Bottoms-->
         <td>
@@ -23,8 +26,8 @@
         </td>
 
     </tr>
-    <h3><%= users[i]._id%></h3>
-    <h3><%= caca[i]._id%></h3> <!--USING res.locals from the Route "/" GET that the server SEND to the database -->
+
+    <!--<h3><%= caca[i]._id%></h3> USING res.locals from the Route "/" GET that the server SEND to the database -->
     
 
 <% } %>
