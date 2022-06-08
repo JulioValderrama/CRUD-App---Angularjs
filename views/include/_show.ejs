@@ -1,6 +1,7 @@
 <!--Using ejs engine in rder to iterate through the list of Objects we've got from the database thanks to the HTTP GET request "/" when visiting the home page-->
 <script> angularusers = [] </script>
-
+<input class="btn btn-info" type="button" value="Click to use $Resource" ng-click="getUser()">
+<h3>{{getCarResponse}}</h3>
 <% for(var i = 0; i < users.length; i++) { %>
 
     <tr>
