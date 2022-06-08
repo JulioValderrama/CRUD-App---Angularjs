@@ -1,8 +1,7 @@
  <!--Include header-->
  <%- include('include/_header') %>
  <!--Include header-->
-<h3>{{userGender}}</h3>
-<h3>{{userId}}</h3>
+
  <!--We assign the ID of the user from the URL (thanks to the req.query.id that we passed with the RESPONSE from the database)-->
 <script> userId = "<%= query.id %>" </script>
 
@@ -19,6 +18,17 @@
             <span class="text-dark">Use the below form to update an User</span>
         </div>
         
+
+        <!-- SCRIPT to assign data from the user to the Window Object so we could have it in Angularjs-->
+        <script> 
+                
+            userName = "<%= user.name %>";
+            userEmail = "<%= user.email %>"
+            userGender = "<%= user.gender %>";
+            userStatus = "<%= user.status %>"
+            
+        </script>
+
         <!-- add user form -->
         <!-- With that action we will send a POST REQUEST to that url. We have an API route.post("/api/users/:id", controller.update) that will access to that ID in the URL (that comes from the _show.ejs file) with the query.id (that comes from the response from the database) -->
         <form action= "/api/users/<%= query.id %>" method="POST" id="update_user">
@@ -32,6 +42,7 @@
                     <label for="Email" class="text-light">Email</label>
                     <input type="text" name="email" value="<%= user.email %>" placeholder="<%= user.email %>" ng-model="userEmail" required>
                 </div>
+
                 <div class="form-group">
                     <label for="gender" class="text-light">Gender</label>
                     <div class="radio inline">
@@ -43,26 +54,28 @@
                         <label for="radio-3" class="radio-label">Female</label>
                     </div>
                 </div>
-        
+
                 <div class="form-group">
                     <label for="gender" class="text-light">Status</label>
                     <div class="radio inline">
-                        <input type="radio" id="radio-4" name="status" ng-model="userStatus" value="Active" <%= user.status == 'Active' ? 'Checked': '' %>>
+                        <input type="radio" id="radio-4" name="status" value="Active" ng-model="userStatus">
                         <label for="radio-4" class="radio-label">Active</label>
                     </div>
                     <div class="radio inline">
-                        <input type="radio" id="radio-5" name="status" value="Inactive" ng-model="userStatus" <%= user.status == 'Inactive' ? 'Checked': '' %>>
+                        <input type="radio" id="radio-5" name="status" value="Inactive" ng-model="userStatus">
                         <label for="radio-5" class="radio-label">Inactive</label>
                     </div>
                 </div>
         
                 <div class="form-group">
-                    <button type="submit" class="btn text-dark update">Save</button>
+                    <button type="submit" class="btn text-dark update">Save with form POST</button>
                 </div>
-        
+                <div class="form-group">
+                    <button type="submit" class="btn text-dark update" ng-click="saveUser()">Save with $http.post Angularjs</button>
+                </div>
+                
             </div>
         </form> 
-        <input class="btn btn-info" type="button" value="Show User" ng-click="saveUser()">
     </div>
 </main>
 <!-- /Main Site -->

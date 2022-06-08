@@ -8,7 +8,7 @@ angular.module("myApp")
         $resourceProvider.defaults.stripTrailingSlashes = false;
     }])
 
-    .controller("homeController", ["$scope", "$resource", "$http", function($scope, $resource, $http) {
+    .controller("homeController", ["$scope", "$http", "$location", "$window", function($scope, $http, $location, $window) {
 
         $scope.angularusers = window.angularusers;
         $scope.userId = window.userId;
@@ -17,10 +17,10 @@ angular.module("myApp")
         $scope.getUser;
 
         $scope.userId;
-        $scope.userName;
-        $scope.userEmail;
-        $scope.userGender;
-        $scope.userStatus;
+        $scope.userName = window.userName;
+        $scope.userEmail = window.userEmail;
+        $scope.userGender = window.userGender;
+        $scope.userStatus = window.userStatus;
         
         $scope.clickGetUsers = function() {
 
@@ -58,6 +58,7 @@ angular.module("myApp")
 
         $scope.saveUser = function() {
 
+            
             var updateUser = JSON.stringify({
                 name: $scope.userName,
                 email: $scope.userEmail,
@@ -79,10 +80,10 @@ angular.module("myApp")
                 alert(data.Message);
             });
 
+            var url = "http://localhost:5500/"
+            $window.location.href = url;
             
         }
-
-
 
     }])
 
