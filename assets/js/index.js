@@ -1,12 +1,21 @@
+// Create angular myApp
+
 angular.module('myApp', [])
 
 angular.module("myApp")
+
+
     .controller("homeController", ["$scope", function($scope) {
 
-        $scope.angu = "HOLA";
+        $scope.angularusers = window.angularusers;
+        $scope.angularClick;
 
+        $scope.getDetails = (index) => {
+            
+            $scope.index = index + 1;
+            $scope.angularClick = $scope.angularusers[index]
+        }
     }])
-
 
 
 
