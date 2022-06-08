@@ -23,6 +23,9 @@ connectDB();
 // We create a middleware to parse REQUEST to body parser
 app.use(bodyparser.urlencoded({ extended: true}))
 
+//In order to get REQ.BODY data sent from $http.POST from Angularjs
+app.use(express.json())
+
 // set EJS view engine 
 app.set("view engine", "ejs");
 
