@@ -1,6 +1,6 @@
 <!--Using ejs engine in rder to iterate through the list of Objects we've got from the database thanks to the HTTP GET request "/" when visiting the home page-->
 <script> angularusers = [] </script>
-<input class="btn btn-info" type="button" value="Get all Users $http req Angularjs" ng-click="clickGetUsers()">
+<input class="btn btn-info" type="button" value="Get all Users with $http request" ng-click="clickGetUsers()">
 <h3>{{getUsers}}</h3>
 <h3>{{getUser}}</h3>
 <h3>{{id}}</h3>
@@ -9,8 +9,8 @@
     <tr>
 
         <!--Data display with DATA from the database  -->
-        <td> <input class="btn btn-info" type="button" value="Show User with Angularjs" ng-click="getDetails(<%= i %>)"></td>
-        <td> <input class="btn btn-secondary" type="button" value="Get User $http req Angularjs" ng-click="clickGetUser(<%= i %>)"> </td>
+        <td> <input class="btn btn-info" type="button" value="Show User" ng-click="getDetails(<%= i %>)"></td>
+        <td> <input class="btn btn-secondary" type="button" value="Get User" ng-click="clickGetUser(<%= i %>)"> </td>
         <td><%= i + 1 %></td>
         <td><%= users[i].name %></td> <script> angularusers["<%= i  %>"] = {name: "<%= users[i].name %>"} </script>
         <td><%= users[i].email %></td> <script> angularusers["<%= i  %>"].email = "<%= users[i].email %>" </script>
