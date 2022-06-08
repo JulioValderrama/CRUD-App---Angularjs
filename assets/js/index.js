@@ -11,10 +11,17 @@ angular.module("myApp")
     .controller("homeController", ["$scope", "$resource", "$http", function($scope, $resource, $http) {
 
         $scope.angularusers = window.angularusers;
+        $scope.userId = window.userId;
         $scope.angularClick;
         $scope.getUsers;
         $scope.getUser;
 
+        $scope.userId;
+        $scope.userName;
+        $scope.userEmail;
+        $scope.userGender;
+        $scope.userStatus;
+        
         $scope.clickGetUsers = function() {
 
             $http.get("http://localhost:5500/api/users")
@@ -43,17 +50,51 @@ angular.module("myApp")
                 })
         }
 
-        
-
         $scope.getDetails = (index) => {
             
             $scope.index = index + 1;
             $scope.angularClick = $scope.angularusers[index]
         }
 
+        $scope.saveUser = function() {
+
+            var updateUser = JSON.stringify({
+                name: $scope.userName,
+                email: $scope.userEmail,
+                gender: $scope.userGender,
+                status: $scope.userStatus
+            })
+
+            var config = {
+                headers : {
+                    'Content-Type': 'application/json'
+                }
+            }
+
+            $http.post(`http://localhost:5500/api/users/${$scope.userId}`, updateUser, config)
+            .then(function (data) {
+                alert(`The data is: ${data} and the updateUser is: ${updateUser}`);
+            })
+            .catch(function (data) {
+                alert(data.Message);
+            });
+
+            
+        }
+
+
+
     }])
 
-
+/*
+{
+                method: "POST",
+                url: `http://localhost:5500/api/users/${$scope.userId}`,
+                dataType: 'json',
+                data: updateUser,
+                headers: { "Content-Type": 'application/x-www-form-urlencoded;charset=utf-8;' }
+            }
+*/
 
 // To send a DELETE Request from the <a> delet ebottom in _show.ejs 
 

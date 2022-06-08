@@ -39,7 +39,7 @@ exports.add_user = (req, res) => {
 exports.update_user = (req, res) => {
     axios.get("http://localhost:5500/api/users", { params: {id:req.query.id}})
     .then(userdata => {
-        //res.render("update_user", {users: response.data, query: req.query}) YOU CAN ACCESS TO THE REQ.QUERY FROM THE URL IN YOUR .EJS FILE LIKE THIS
+        // YOU CAN ACCESS TO THE REQ.QUERY FROM THE URL IN YOUR .EJS FILE LIKE THIS
         res.render("update_user", {user: userdata.data, query: req.query})
     })
     .catch(err => {
