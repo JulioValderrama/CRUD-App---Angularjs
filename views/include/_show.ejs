@@ -6,6 +6,7 @@
     <tr>
 
         <!--Data display with DATA from the database  -->
+        <td> <input type="button" value="Show data with Angularjs" ng-click="getDetails(<%= i %>)"></td>
         <td><%= i + 1 %></td>
         <td><%= users[i].name %></td> <script> angularusers["<%= i  %>"] = {name: "<%= users[i].name %>"} </script>
         <td><%= users[i].email %></td> <script> angularusers["<%= i  %>"].email = "<%= users[i].email %>" </script>
